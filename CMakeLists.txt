@@ -1,3 +1,6 @@
+set(BUILD_SHARED_LIBS OFF)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 cmake_minimum_required(VERSION 3.14...4.2.1)
 message(STATUS "Using CMake version ${CMAKE_VERSION}")
 

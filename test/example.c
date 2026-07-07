@@ -53,7 +53,7 @@ static void test_compress(unsigned char *compr, z_uintmax_t comprLen, unsigned c
     int err;
     unsigned int len = (unsigned int)strlen(hello)+1;
 
-    err = PREFIX(compress)(compr, &comprLen, (const unsigned char*)hello, len);
+    err = PREFIX(compress)(compr, &comprLen, (const unsigned char*)hello, len, 0, 0);
     CHECK_ERR(err, "compress");
 
     strcpy((char*)uncompr, "garbage");

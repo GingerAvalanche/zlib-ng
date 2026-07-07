@@ -29,7 +29,8 @@
    Z_STREAM_ERROR if the level parameter is invalid.
 */
 z_int32_t Z_EXPORT PREFIX(compress2)(unsigned char *dest, z_uintmax_t *destLen, const unsigned char *source,
-                        z_uintmax_t sourceLen, z_int32_t level) {
+                        z_uintmax_t sourceLen, z_int32_t level, handle_match_func handle_match,
+                        void* handle_match_userdata) {
     PREFIX3(stream) stream;
     int err;
     const unsigned int max = (unsigned int)-1;
@@ -41,6 +42,8 @@ z_int32_t Z_EXPORT PREFIX(compress2)(unsigned char *dest, z_uintmax_t *destLen, 
     stream.zalloc = NULL;
     stream.zfree = NULL;
     stream.opaque = NULL;
+    stream.handle_match = handle_match;
+    stream.handle_match_userdata = handle_match_userdata;
 
     err = PREFIX(deflateInit)(&stream, level);
     if (err != Z_OK)
@@ -70,8 +73,8 @@ z_int32_t Z_EXPORT PREFIX(compress2)(unsigned char *dest, z_uintmax_t *destLen, 
 
 /* ===========================================================================
  */
-z_int32_t Z_EXPORT PREFIX(compress)(unsigned char *dest, z_uintmax_t *destLen, const unsigned char *source, z_uintmax_t sourceLen) {
-    return PREFIX(compress2)(dest, destLen, source, sourceLen, Z_DEFAULT_COMPRESSION);
+z_int32_t Z_EXPORT PREFIX(compress)(unsigned char *dest, z_uintmax_t *destLen, const unsigned char *source, z_uintmax_t sourceLen, handle_match_func handle_match, void* handle_match_userdata) {
+    return PREFIX(compress2)(dest, destLen, source, sourceLen, Z_DEFAULT_COMPRESSION, handle_match, handle_match_userdata);
 }
 
 /* ===========================================================================
