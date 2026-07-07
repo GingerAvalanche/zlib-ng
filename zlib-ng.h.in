@@ -117,6 +117,7 @@ typedef struct zng_stream_s {
     int                   data_type;  /* best guess about the data type: binary or text
                                          for deflate, or the decoding state for inflate */
     uint32_t              adler;      /* Adler-32 or CRC-32 value of the uncompressed data */
+    unsigned long         reserved;   /* reserved for future use */
 
     handle_match_func     handle_match;
     void*                 handle_match_userdata;
