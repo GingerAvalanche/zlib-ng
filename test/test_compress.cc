@@ -21,7 +21,7 @@ TEST(compress, basic) {
     z_uintmax_t compr_len = sizeof(compr), uncompr_len = sizeof(uncompr);
     int err;
 
-    err = PREFIX(compress)(compr, &compr_len, (const unsigned char *)hello, hello_len);
+    err = PREFIX(compress)(compr, &compr_len, (const unsigned char *)hello, hello_len, nullptr, nullptr);
     EXPECT_EQ(err, Z_OK);
 
     strcpy((char*)uncompr, "garbage");

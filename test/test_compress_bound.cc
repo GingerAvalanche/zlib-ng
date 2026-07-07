@@ -40,7 +40,7 @@ public:
             /* calculate actual output length */
             estimate_len = PREFIX(compressBound)(i);
 
-            err = PREFIX(compress2)(dest, &dest_len, uncompressed, i, level);
+            err = PREFIX(compress2)(dest, &dest_len, uncompressed, i, level, nullptr, nullptr);
             EXPECT_EQ(err, Z_OK);
             EXPECT_GE(estimate_len, dest_len) <<
                 "level: " << level << "\n" <<
