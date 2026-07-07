@@ -85,6 +85,11 @@ static inline int zng_tr_tally_lit(deflate_state *s, unsigned char c) {
 }
 
 static inline int zng_tr_tally_dist(deflate_state* s, uint32_t dist, uint32_t len) {
+    if (s->strm->handle_match) {
+        s->strm->handle_match(s->strm->handle_match_userdata, dist, len);
+        return 0;
+    }
+
     /* dist: distance of matched string */
     /* len: match length-STD_MIN_MATCH */
     unsigned int sym_next = s->sym_next;
